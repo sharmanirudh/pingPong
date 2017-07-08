@@ -252,32 +252,33 @@
 
 		paddleOne.style.top = '0px';
 		paddleOne.style.left = '0px';
-		//paddleOne.style.right = paddleOne.getBoundingClientRect().width + 'px';
 		paddleTwo.style.top = '0px';
 		paddleTwo.style.left = '0px';
 
 		number = setInterval(function() {
 			var currentTop = parseFloat(ball.style.top.slice(0,-2));
 			var currentLeft = parseFloat(ball.style.left.slice(0,-2));
-			if(currentLeft <= 0 && (currentTop >= paddleOne.style.top.slice(0,-2) && currentTop <= parseFloat(paddleOne.style.top.slice(0,-2)) + paddleRubberHeight) ) {
+			if(currentLeft <= 0) {
+				if(currentTop >= parseFloat(paddleOne.style.top.slice(0,-2)) && currentTop <= parseFloat(paddleOne.style.top.slice(0,-2)) + paddleRubberHeight)
+					mvmnt1 = 'd';
+				else {
+					scorePlayerTwo.textContent = parseFloat(scorePlayerTwo.textContent) + 1;
+					clearInterval(number);
+					number = null;
+				}
 
-				console.log(currentTop, paddleOne.style.top.slice(0,-2), paddleRubberHeight);
-				mvmnt1 = 'd';
-			}
-			else if(currentLeft <= 0 && (currentTop >= paddleOne.style.top.slice(0,-2) && currentTop <= parseFloat(paddleOne.style.top.slice(0,-2)) + paddleRubberHeight) == false) {
-				
-				scorePlayerTwo.textContent = parseFloat(scorePlayerTwo.textContent) + 1;
-				clearInterval(number);
-				number = null;
 			}
 
-			if(currentLeft + ballWidth >= maxWidth && (currentTop >= paddleTwo.style.top.slice(0,-2) && currentTop <= paddleTwo.style.top.slice(0,-2) + paddleRubberHeight) )
-				mvmnt1 = 'a';
-			else if(currentLeft + ballWidth >= maxWidth && (currentTop >= paddleTwo.style.top.slice(0,-2) && currentTop <= paddleTwo.style.top.slice(0,-2) + paddleRubberHeight) == false) {
-				
-				scorePlayerOne.textContent = parseFloat(scorePlayerOne.textContent) + 1;
-				clearInterval(number);
-				number = null;
+			if(currentLeft + ballWidth >= maxWidth) {
+				if(currentTop >= parseFloat(paddleTwo.style.top.slice(0,-2)) && currentTop <= parseFloat(paddleTwo.style.top.slice(0,-2)) + paddleRubberHeight) {
+					console.log(currentTop, ">=", parseFloat(paddleTwo.style.top.slice(0,-2)), "&&", currentTop, "<=", parseFloat(paddleTwo.style.top.slice(0,-2)), "+", paddleRubberHeight);
+					mvmnt1 = 'a';
+				}
+				else {
+					scorePlayerOne.textContent = parseFloat(scorePlayerOne.textContent) + 1;
+					clearInterval(number);
+					number = null;
+				}
 			}
 			
 			if(currentTop <= 0)
