@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<img id="floor" src="Wooden-Background.jpg">
+
+<div id="player">
+	<h3>PLAYER 1</h3>
+	<button id="playAgain">Play Again</button>
+	<h3>PLAYER 2</h3>
+</div>
+
+<div id="score">
+	<h2 id="scorePlayerOne">0</h2>
+	<h2 id="scorePlayerTwo">0</h2>
+</div>
+
+<div id="gameArea">
+	<div id="paddleOne"><img id="paddleOneImage" src="tt-racket-trans-rotate.png"></div>
+	<div id="tableContainer">
+		<div id="ball"></div>
+		<div id="net">
+			<div id="netJointOne"></div>
+			<div id="mesh"></div>
+			<div id="netJointTwo"></div>
+		</div>
+		<div id="table">
+			<div id="tableOne"></div>
+			<div id="tableTwo"></div>
+		</div>
+	</div>
+	<div id="paddleTwo"><img id="paddleTwoImage" src="tt-racket-trans-rotate.png"></div>
+</div>
+
+<div>
+	<h1>MULTIPLAYER</h1>
+</div>
+<style type="text/css">
+	* {
+		padding: 0;
+		margin: 0;
+	}
+	body{
+		height: 100vh;
+		width: 100%;
+	}
+	#floor {
+		position: absolute;
+		z-index: -1;
+		height: 100vh;
+		width: 100vw;
+	}
+	#player {
+		display: flex;
+		justify-content: space-between;
+		height: 2%;
+		width: 100%
+	}
+	div#player h3:nth-of-type(1) {
+		color: yellow;
+		font-family: Arial;
+		font-size: 210%;
+	}
+	div#player h3:nth-of-type(2) {
+		color: yellow;
+		font-family: Arial;
+		font-size: 210%;
+	}
+	#playAgain {
+		cursor: hand;
+		cursor: pointer;
+		font-size: 180%;
+		margin:auto;
+		padding:10px;	
+		color: white;
+		background-color: black;
+		border: none;
+		border-radius: 15%;
+		box-shadow: -5px 0px 40px 3px #458167;
+		font-family: Arial;
+		text-shadow: 1px  1px 2px orange, 1px -1px 2px orange, 1px  1px 2px orange, -1px -1px 2px orange;
+	}
+	#score {
+		display: flex;
+		justify-content: space-between;
+		padding-left: 3%;
+		padding-right: 3%;
+	}
+	#scorePlayerOne {
+		color: yellow;
+		font-family: Arial;
+		font-size: 650%;
+	}
+	#scorePlayerTwo {
+		color: yellow;
+		font-family: Arial;
+		font-size: 650%;
+	}
+	#gameArea {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		margin: auto; 
+		width: 62%;
+		height: 64%;
+	}
+	#paddleOne {
+		position: relative;
+		z-index: 3;
+		width: 2%;
+		height: 100%;
+		border:thick solid rgba(0,0,0,0);
+	}
+	#paddleOneImage {
+		position: absolute;
+		align-self: flex-end;
+		width: 100%;
+		height: 22%;
+	}
+	#paddleTwo {
+		position: relative;
+		z-index: 3;
+		width: 2%;
+		height: 100%;
+		border:thick solid rgba(0,0,0,0);
+	}
+	#paddleTwoImage{
+		position: absolute;
+		align-self: flex-start;
+		width: 100%;
+		height: 22%;
+	}
+	#tableContainer {
+		position: relative;
+		width: 90%;
+		height: 100%;
+	}
+	#net {
+		position: absolute;
+		z-index: 2;
+		top: -7.6%;
+		height: 116%;
+		width: 100%;
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	#netJointOne {
+		z-index: 2;
+		height: 8%;
+		width: 0.7%;
+		background-color: white;
+	}
+	#mesh {
+		z-index: 2;
+		height: 100%;
+		width: 0.3%;
+		background-color: #022412;
+		border-left: thin dashed white;
+		box-shadow: 5px 0px 40px 3px #458167, -5px 0px 40px 3px #458167;
+	}
+	#netJointTwo {
+		z-index: 2;
+		height: 8%;
+		width: 0.7%;
+		background-color: white;
+	}
+	#ball {
+		position: absolute;
+		z-index: 3;
+		height: 15px;
+		width: 15px;
+		border-radius: 50%;
+		background-color: orange;
+		box-shadow: 5px 0px 40px 3px #354e43;
+	}
+	#table {
+		position: absolute;
+		z-index: 1;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	#tableOne {
+		height: 50%;
+		width: 100%;
+		background-color: #67b091;
+		border: thick solid white;
+		border: thick solid #ebfffa;
+		box-shadow: inset 20px 20px 100px 0px #458167, 15px 0 110px 30px #2a312f;
+	}
+	#tableTwo {
+		height: 50%;
+		width: 100%;
+		background-color: #81c7aa;
+		border: thick solid white;
+		border-top: none;
+		box-shadow: inset 20px -20px 100px 0px #458167, 30px 8px 110px 0px #2a312f;
+	}
+	h1 {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		text-align: center;
+		color: white;
+		font-family: Arial;
+		text-shadow: 1px  1px 2px green, 1px -1px 2px green, 1px  1px 2px green, -1px -1px 2px green;
+		font-size: 450%;
+	}
+</style>
+
+<script type="text/javascript">
+	scorePlayerOne = document.getElementById('scorePlayerOne');
+	scorePlayerTwo = document.getElementById('scorePlayerTwo');
+	var number;
+
+	var paddleOne = document.getElementById('paddleOneImage');
+	var paddleTwo = document.getElementById('paddleTwoImage');
+	var paddleRubberHeight = ( paddleOne.getBoundingClientRect().bottom - paddleOne.getBoundingClientRect().top ) * 0.50;
+	var table = document.getElementById('table');
+	var tableRectangle = table.getBoundingClientRect();
+
+	function ball() {
+		var maxHeight = table.clientHeight;
+		var maxWidth = table.clientWidth;
+
+		var ball = document.getElementById('ball');
+		function randomTop() {
+			min = Math.ceil(0);
+			max = Math.floor(maxHeight);
+			return (Math.floor(Math.random() * (max - min)) + min + 1) + 'px'; 
+		}
+		ball.style.top = randomTop();
+		console.log(tableRectangle.top, tableRectangle.bottom, ball.style.top);
+		ball.style.left = '1px';
+		ball.style.width = '15px';
+		ball.style.height = '15px';
+		var ballWidth = parseFloat(ball.style.width.slice(0,-2));
+		var ballHeight = parseFloat(ball.style.height.slice(0,-2));
+		
+		var mvmnt1 = 'd';
+		var mvmnt2 = 's';
+
+		paddleOne.style.top = '0px';
+		paddleOne.style.left = '0px';
+		//paddleOne.style.right = paddleOne.getBoundingClientRect().width + 'px';
+		paddleTwo.style.top = '0px';
+		paddleTwo.style.left = '0px';
+
+		number = setInterval(function() {
+			var currentTop = parseFloat(ball.style.top.slice(0,-2));
+			var currentLeft = parseFloat(ball.style.left.slice(0,-2));
+			if(currentLeft <= 0 && (currentTop >= paddleOne.style.top.slice(0,-2) && currentTop <= parseFloat(paddleOne.style.top.slice(0,-2)) + paddleRubberHeight) ) {
+
+				console.log(currentTop, paddleOne.style.top.slice(0,-2), paddleRubberHeight);
+				mvmnt1 = 'd';
+			}
+			else if(currentLeft <= 0 && (currentTop >= paddleOne.style.top.slice(0,-2) && currentTop <= parseFloat(paddleOne.style.top.slice(0,-2)) + paddleRubberHeight) == false) {
+				
+				scorePlayerTwo.textContent = parseFloat(scorePlayerTwo.textContent) + 1;
+				clearInterval(number);
+				number = null;
+			}
+
+			if(currentLeft + ballWidth >= maxWidth && (currentTop >= paddleTwo.style.top.slice(0,-2) && currentTop <= paddleTwo.style.top.slice(0,-2) + paddleRubberHeight) )
+				mvmnt1 = 'a';
+			else if(currentLeft + ballWidth >= maxWidth && (currentTop >= paddleTwo.style.top.slice(0,-2) && currentTop <= paddleTwo.style.top.slice(0,-2) + paddleRubberHeight) == false) {
+				
+				scorePlayerOne.textContent = parseFloat(scorePlayerOne.textContent) + 1;
+				clearInterval(number);
+				number = null;
+			}
+			
+			if(currentTop <= 0)
+				mvmnt2 = 's';
+			
+			if(currentTop + ballHeight >= maxHeight)
+				mvmnt2 = 'w';
+			
+			if(mvmnt1 == 'd' && mvmnt2 == 's')
+			{
+				currentLeft = currentLeft + 1;
+				currentTop = currentTop + 1;
+			}
+			else if(mvmnt1 == 'a' && mvmnt2 == 's')
+			{
+				currentLeft = currentLeft - 1;
+				currentTop = currentTop + 1;
+			}
+			else if(mvmnt1 == 'd' && mvmnt2 == 'w')
+			{
+				currentLeft = currentLeft + 1;
+				currentTop = currentTop - 1;
+			}
+			else if(mvmnt1 == 'a' && mvmnt2 == 'w')
+			{
+				currentLeft = currentLeft - 1;
+				currentTop = currentTop - 1;
+			}
+			
+			ball.style.top = currentTop + 'px';
+			ball.style.left = currentLeft + 'px';
+		}, 0);
+
+	};
+
+	function paddle() {
+		var map = {}; // You could also use an array
+		onkeydown = onkeyup = function(event){
+		    event = event || event; // to deal with IE
+		    map[event.keyCode] = event.type == 'keydown';
+		    /* insert conditional here */
+		    if(map[40] == true){
+				if(parseFloat(paddleTwo.style.top.slice(0,-2)) + tableRectangle.top + paddleRubberHeight + 30 <= tableRectangle.bottom)
+					paddleTwo.style.top = (parseFloat(paddleTwo.style.top.slice(0,-2)) + 30 ) + 'px';
+			}
+			if(map[38] == true){
+				if(parseFloat(paddleTwo.style.top.slice(0,-2)) + tableRectangle.top + 30 >= tableRectangle.top)
+					paddleTwo.style.top = (parseFloat(paddleTwo.style.top.slice(0,-2)) - 30 ) + 'px';
+			}
+			if(map[83] == true) {
+				if(parseFloat(paddleOne.style.top.slice(0,-2)) + tableRectangle.top + paddleRubberHeight + 30 <= tableRectangle.bottom)
+					paddleOne.style.top = (parseFloat(paddleOne.style.top.slice(0,-2)) + 30 ) + 'px';
+			}
+			if(map[87] == true) {
+				if(parseFloat(paddleOne.style.top.slice(0,-2)) + tableRectangle.top + 30 >= tableRectangle.top)
+					paddleOne.style.top = (parseFloat(paddleOne.style.top.slice(0,-2)) - 30 ) + 'px';
+			}
+		}
+	};
+
+	function playAgain(event) {
+		console.log(number);
+		if(!number)
+			ball();
+		console.log("playAgainButton");
+	}
+	var playAgainButton = document.getElementById('playAgain');
+	playAgainButton.addEventListener('click', playAgain);
+
+	ball();
+	paddle();
+</script>
+
+</body>
+</html>
