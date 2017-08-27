@@ -291,6 +291,7 @@
 		// touchMovePaddleTwo.addEventListener('touchend', process_touchend, false);
 
 		function process_touchmove(ev) {
+			ev.preventDefault();
 			switch(ev.touches.length) {
 				case 1: handle_one_touch_move(ev);break;
 				case 2: handle_two_touches_move(ev);break;
