@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title></title>
+	<script src="jquery-3.2.1.min.js"></script>
 </head>
 <body>
 
@@ -19,6 +20,7 @@
 </div>
 
 <div id="gameArea">
+	<div id="touchMovePaddleOne"></div>
 	<div id="paddleOne"><img id="paddleOneImage" src="tt-racket-trans-rotate.png"></div>
 	<div id="tableContainer">
 		<div id="ball"></div>
@@ -33,6 +35,7 @@
 		</div>
 	</div>
 	<div id="paddleTwo"><img id="paddleTwoImage" src="tt-racket-trans-rotate.png"></div>
+	<div id="touchMovePaddleTwo"></div>
 </div>
 
 <div>
@@ -104,8 +107,13 @@
 		display: flex;
 		justify-content: center;
 		margin: auto; 
-		width: 62%;
+		width: 100%;
 		height: 64%;
+	}
+	#touchMovePaddleOne {
+		z-index: 3;
+		width: 17%;
+		height: 100%;
 	}
 	#paddleOne {
 		position: relative;
@@ -119,6 +127,11 @@
 		align-self: flex-end;
 		width: 100%;
 		height: 22%;
+	}
+	#touchMovePaddleTwo {
+		z-index: 3;
+		width: 17%;
+		height: 100%;
 	}
 	#paddleTwo {
 		position: relative;
@@ -135,7 +148,7 @@
 	}
 	#tableContainer {
 		position: relative;
-		width: 90%;
+		width: 62%;
 		height: 100%;
 	}
 	#net {
@@ -254,7 +267,38 @@
 		paddleOne.style.left = '0px';
 		paddleTwo.style.top = '0px';
 		paddleTwo.style.left = '0px';
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		var touchMovePaddleOne = document.getElementById('touchMovePaddleOne');
+		var touchMovePaddleTwo = document.getElementById('touchMovePaddleTwo');
+		touchMovePaddleOne.addEventListener('touchmove', function(ev) {
+			console.log('Donot Touch Me!!!!!!!');
+			console.log(ev.touches[0].pageX, ev.touches[0].pageY);
+			if(ev.touches[0].pageY > document.getElementById('netJointOne').getBoundingClientRect().bottom && ev.touches[0].pageY < document.getElementById('netJointTwo').getBoundingClientRect().bottom - 40)
+				paddleOne.style.top = ev.touches[0].pageY - 150 + 'px'
+		}, false);
+		// touchMovePaddleOne.addEventListener('touchstart', process_touchstart, false);
+		// touchMovePaddleOne.addEventListener('touchcancel', process_touchcancel, false);
+		// touchMovePaddleOne.addEventListener('touchend', process_touchend, false);
 
+		touchMovePaddleTwo.addEventListener('touchmove', function(ev) {
+			console.log('Donot Touch Me!!!!!!!');
+			console.log(ev.touches[0].pageX, ev.touches[0].pageY);
+			if(ev.touches[0].pageY > document.getElementById('netJointOne').getBoundingClientRect().bottom && ev.touches[0].pageY < document.getElementById('netJointTwo').getBoundingClientRect().bottom - 40)
+				paddleTwo.style.top = ev.touches[0].pageY - 150 + 'px'
+		}, false);
+		// touchMovePaddleTwo.addEventListener('touchstart', process_touchstart, false);
+		// touchMovePaddleTwo.addEventListener('touchcancel', process_touchcancel, false);
+		// touchMovePaddleTwo.addEventListener('touchend', process_touchend, false);
+
+		function process_touchmove(ev) {
+			switch(ev.touches.length) {
+				case 1: handle_one_touch_move(ev);break;
+				case 2: handle_two_touches_move(ev);break;
+			}
+		}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		number = setInterval(function() {
 			var currentTop = parseFloat(ball.style.top.slice(0,-2));
 			var currentLeft = parseFloat(ball.style.left.slice(0,-2));
