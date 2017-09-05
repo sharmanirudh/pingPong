@@ -294,9 +294,8 @@
 			ev.preventDefault();
 			switch(ev.touches.length) {
 				case 1: handle_one_touch_move(ev);break;
-				case 2: function(ev) {
-							ev.preventDefault();
-						};break;
+				case 2: ev.preventDefault();
+					break;
 			}
 		}
 
