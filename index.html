@@ -366,7 +366,7 @@
 		    map[event.keyCode] = event.type == 'keydown';
 		    /* insert conditional here */
 		    if(map[40] == true){
-				if(parseFloat(paddleTwo.style.top.slice(0,-2)) + tableRectangle.top + paddleRubberHeight + 30 <= tableRectangle.bottom)
+				if(parseFloat(paddleTwo.style.top.slice(0,-2)) + tableRectangle.top + paddleRubberHeight + 10 <= tableRectangle.bottom)
 					paddleTwo.style.top = (parseFloat(paddleTwo.style.top.slice(0,-2)) + 30 ) + 'px';
 			}
 			if(map[38] == true){
@@ -374,7 +374,7 @@
 					paddleTwo.style.top = (parseFloat(paddleTwo.style.top.slice(0,-2)) - 30 ) + 'px';
 			}
 			if(map[83] == true) {
-				if(parseFloat(paddleOne.style.top.slice(0,-2)) + tableRectangle.top + paddleRubberHeight + 30 <= tableRectangle.bottom)
+				if(parseFloat(paddleOne.style.top.slice(0,-2)) + tableRectangle.top + paddleRubberHeight + 10 <= tableRectangle.bottom)
 					paddleOne.style.top = (parseFloat(paddleOne.style.top.slice(0,-2)) + 30 ) + 'px';
 			}
 			if(map[87] == true) {
